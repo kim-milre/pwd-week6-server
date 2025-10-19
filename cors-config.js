@@ -26,7 +26,7 @@ const getCorsConfig = () => {
       allowedOrigins.push(process.env.PRODUCTION_CLIENT_URL);
     }
     // 기본 배포 클라이언트 도메인(프로젝트 기본값) 허용 - 필요 시 환경변수로 교체
-    const defaultClient = process.env.DEFAULT_CLIENT_URL || 'https://pwd-week6-client.vercel.app';
+    const defaultClient = process.env.DEFAULT_CLIENT_URL || 'https://pwd-week4-kim-milre.netlify.app';
     allowedOrigins.push(defaultClient);
   }
 
@@ -39,7 +39,7 @@ const getCorsConfig = () => {
   return {
     origin: (origin, callback) => {
       // Origin 헤더가 없는 요청(Postman, 서버간 통신, 헬스체크 등)은 항상 허용
-      if (!origin) {
+      if (!origin || origin === 'null') {
         console.log('✅ CORS: No origin header (server-to-server)');
         return callback(null, true);
       }

@@ -25,7 +25,7 @@ function createApp() {
 
   // 세션 설정
   const sessionConfig = {
-    secret: process.env.SESSION_SECRET || 'your-secret-key-change-in-production',
+    secret: process.env.SESSION_SECRET || '0114d3caaa02a7be04f038b7c5bd495411035abe80a3e6a0a1ee75fd4da58c86',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -39,6 +39,8 @@ function createApp() {
   // 프록시 환경에서 set-cookie 처리 안정화
   if (process.env.NODE_ENV === 'production') {
     sessionConfig.proxy = true;
+    sessionConfig.cookie.sameSite = 'none';
+    sessionConfig.cookie.secure = true;
   }
 
   // MongoDB가 연결되어 있으면 MongoStore 사용, 아니면 메모리 세션 사용
